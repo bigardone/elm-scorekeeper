@@ -60,6 +60,9 @@ update msg model =
         Input name ->
             { model | name = name }
 
+        Cancel ->
+            { model | name = "", playerId = Nothing }
+
         _ ->
             model
 
@@ -73,6 +76,7 @@ view model =
     div [ class "scoreboard" ]
         [ h1 [] [ text "Score Keeper" ]
         , playerForm model
+        , p [] [ text (toString model) ]
         ]
 
 
