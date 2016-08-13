@@ -96,3 +96,12 @@ playerForm model =
             ]
             [ text "Cancel" ]
         ]
+
+
+main : Program Never
+main =
+    App.beginnerProgram
+        { model = initModel
+        , view = view
+        , update = update
+        }
