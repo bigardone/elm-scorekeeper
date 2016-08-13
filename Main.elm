@@ -62,3 +62,37 @@ update msg model =
 
         _ ->
             model
+
+
+
+-- view
+
+
+view : Model -> Html Msg
+view model =
+    div [ class "scoreboard" ]
+        [ h1 [] [ text "Score Keeper" ]
+        , playerForm model
+        ]
+
+
+playerForm : Model -> Html Msg
+playerForm model =
+    Html.form
+        [ onSubmit Save ]
+        [ input
+            [ type' "text"
+            , placeholder "Add/Edit Player..."
+            , onInput Input
+            , value model.name
+            ]
+            []
+        , button
+            [ type' "submit" ]
+            [ text "Save" ]
+        , button
+            [ type' "button"
+            , onClick Cancel
+            ]
+            [ text "Cancel" ]
+        ]
