@@ -77,8 +77,27 @@ update msg model =
         Edit player ->
             { model | name = player.name, playerId = Just player.id }
 
-        _ ->
-            model
+        DeletePlay play ->
+            deletePlay model play
+
+
+deletePlay : Model -> Play -> Model
+deletePlay model play =
+    let
+        newPlays =
+            List.filter (\p -> p.id /= play.id) model.plays
+
+        newPlayers =
+            List.map
+                (\player ->
+                    if player.id == play.playerId then
+                        { player | points = player.points - 1 * play.points }
+                    else
+                        player
+                )
+                model.players
+    in
+        { model | players = newPlayers, plays = newPlays }
 
 
 score : Model -> Player -> Int -> Model
